@@ -16,15 +16,13 @@ app.use(express.json());
 app.use("/api", apiRouter);
 
 // ===== Serve React (Vite) build =====
-const distPath = path.join(__dirname, "..", "frontend", "dist");
+
 
 // Serve static files
-app.use(express.static(distPath));
+
 
 // For any non-API route, send index.html
-app.get("*", (req, res) => {
-  res.sendFile(path.join(distPath, "index.html"));
-});
+
 // ====================================
 
 app.get("/health", (req, res) => {
