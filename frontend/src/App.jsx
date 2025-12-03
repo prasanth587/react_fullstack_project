@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+const API_URL = import.meta.env.VITE_API_URL || "";
+
 function App() {
   const [form1, setForm1] = useState({ name: "", email: "" });
   const [form2, setForm2] = useState({ username: "", message: "" });
@@ -11,10 +13,10 @@ function App() {
     setStatus1("Submitting...");
 
     try {
-      const res = await fetch("/api/form1", {
+      const res = await fetch(`${API_URL}/api/form1`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form1)
+        body: JSON.stringify(form1),
       });
 
       const data = await res.json().catch(() => ({}));
@@ -36,10 +38,10 @@ function App() {
     setStatus2("Submitting...");
 
     try {
-      const res = await fetch("/api/form2", {
+      const res = await fetch(`${API_URL}/api/form2`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form2)
+        body: JSON.stringify(form2),
       });
 
       const data = await res.json().catch(() => ({}));
@@ -76,7 +78,9 @@ function App() {
             <input
               type="email"
               value={form1.email}
-              onChange={(e) => setForm1({ ...form1, email: e.target.value })}
+              onChange={(e) =>
+                setForm1({ ...form1, email: e.target.value })
+              }
               required
             />
           </label>
